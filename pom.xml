@@ -21,6 +21,7 @@
         <module>shard-jdbc</module>
         <module>send-email</module>
         <module>swagger-two</module>
+        <module>redis-cluster</module>
     </modules>
 
     <!-- 依赖版本管理 -->

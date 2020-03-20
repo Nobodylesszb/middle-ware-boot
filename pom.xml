@@ -23,6 +23,7 @@
         <module>swagger-two</module>
         <module>redis-cluster</module>
         <module>dubbo-parent</module>
+        <module>elastic-search</module>
     </modules>
 
     <!-- 依赖版本管理 -->

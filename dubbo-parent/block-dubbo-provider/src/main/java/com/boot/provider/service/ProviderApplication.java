@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 [zk: localhost:2181(CONNECTED) 0] ls /
 [dubbo, zookeeper]
 [zk: localhost:2181(CONNECTED) 1] ls /dubbo
-[com.boot.common.DubboService]
+[com.boot.com.bo.common.DubboService]
 [zk: localhost:2181(CONNECTED) 2]
  */
 @EnableDubbo

@@ -24,7 +24,6 @@
         <module>redis-cluster</module>
         <module>dubbo-parent</module>
         <module>elastic-search</module>
-        <module>common-component</module>
     </modules>
 
     <!-- 依赖版本管理 -->

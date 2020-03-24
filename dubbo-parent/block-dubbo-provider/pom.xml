@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.dubbo.commont</groupId>
-            <artifactId>block-dubbo-common</artifactId>
+            <artifactId>block-dubbo-com.bo.common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

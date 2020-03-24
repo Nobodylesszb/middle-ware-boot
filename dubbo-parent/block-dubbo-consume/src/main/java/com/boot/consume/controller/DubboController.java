@@ -50,12 +50,12 @@ public class DubboController {
     /**
      * 测试接口版本
      * 启动日志
-     * <dubbo:reference object="com.alibaba.dubbo.common.bytecode.proxy1@3ad65"
+     * <dubbo:reference object="com.alibaba.dubbo.com.bo.common.bytecode.proxy1@3ad65"
      * singleton="true"
-     * interface="com.boot.common.VersionService"
-     * uniqueServiceName="com.boot.common.VersionService:1.0.0"
+     * interface="com.boot.com.bo.common.VersionService"
+     * uniqueServiceName="com.boot.com.bo.common.VersionService:1.0.0"
      * generic="false" version="1.0.0"
-     * id="com.boot.common.VersionService" /> has been built.
+     * id="com.boot.com.bo.common.VersionService" /> has been built.
      */
     @RequestMapping("/getVersion1")
     public String getVersion1 (){

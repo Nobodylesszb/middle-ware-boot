@@ -13,7 +13,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>block-dubbo-com.bo.common</module>
+        <module>block-dubbo-common</module>
         <module>block-dubbo-consume</module>
         <module>block-dubbo-provider</module>
     </modules>

@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: rabbitmq
+
+  rabbitmq:
+    host: localhost
+    password: guest
+    username: guest
+    listener:
+      type: simple
+      simple:
+        default-requeue-rejected: false
+        acknowledge-mode: manual
+
+
+server:
+  port: 9000
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30

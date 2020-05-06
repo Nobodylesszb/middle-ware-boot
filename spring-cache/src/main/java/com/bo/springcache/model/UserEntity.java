@@ -1,0 +1,40 @@
+package com.bo.springcache.model;
+
+import java.io.Serializable;
+
+/**
+ * @Auther: bo
+ * @Date: 2020/5/6 21:19
+ * @Version:
+ * @Description:
+ */
+
+public class UserEntity implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 5237730257103305078L;
+    private Long id;
+    private String userName;
+    private String userSex;
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+    public String getUserSex() {
+        return userSex;
+    }
+    public void setUserSex(String userSex) {
+        this.userSex = userSex;
+    }
+
+}

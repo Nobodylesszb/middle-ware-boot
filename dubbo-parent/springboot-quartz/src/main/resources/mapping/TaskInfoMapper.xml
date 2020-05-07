@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lqcoder.toolset.quartz.mapper.TaskInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lqcoder.toolset.quartz.model.TaskInfo" >
+    <id column="task_id" property="taskId" jdbcType="VARCHAR" />
+    <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+    <result column="trigger_name" property="triggerName" jdbcType="VARCHAR" />
+    <result column="task_groupname" property="taskGroupname" jdbcType="VARCHAR" />
+    <result column="trigger_groupname" property="triggerGroupname" jdbcType="VARCHAR" />
+    <result column="task_status" property="taskStatus" jdbcType="INTEGER" />
+    <result column="task_cron" property="taskCron" jdbcType="VARCHAR" />
+    <result column="last_executetime" property="lastExecutetime" jdbcType="VARCHAR" />
+    <result column="parames" property="parames" jdbcType="VARCHAR" />
+    <result column="next_executetime" property="nextExecutetime" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    task_id, task_name, trigger_name, task_groupname, trigger_groupname, task_status, 
+    task_cron, last_executetime, parames, next_executetime, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from task_info
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from task_info
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lqcoder.toolset.quartz.model.TaskInfo" >
+    insert into task_info (task_id, task_name, trigger_name, 
+      task_groupname, trigger_groupname, task_status, 
+      task_cron, last_executetime, parames, 
+      next_executetime, create_time, update_time
+      )
+    values (#{taskId,jdbcType=VARCHAR}, #{taskName,jdbcType=VARCHAR}, #{triggerName,jdbcType=VARCHAR}, 
+      #{taskGroupname,jdbcType=VARCHAR}, #{triggerGroupname,jdbcType=VARCHAR}, #{taskStatus,jdbcType=INTEGER}, 
+      #{taskCron,jdbcType=VARCHAR}, #{lastExecutetime,jdbcType=VARCHAR}, #{parames,jdbcType=VARCHAR}, 
+      #{nextExecutetime,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lqcoder.toolset.quartz.model.TaskInfo" >
+    insert into task_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="taskName != null" >
+        task_name,
+      </if>
+      <if test="triggerName != null" >
+        trigger_name,
+      </if>
+      <if test="taskGroupname != null" >
+        task_groupname,
+      </if>
+      <if test="triggerGroupname != null" >
+        trigger_groupname,
+      </if>
+      <if test="taskStatus != null" >
+        task_status,
+      </if>
+      <if test="taskCron != null" >
+        task_cron,
+      </if>
+      <if test="lastExecutetime != null" >
+        last_executetime,
+      </if>
+      <if test="parames != null" >
+        parames,
+      </if>
+      <if test="nextExecutetime != null" >
+        next_executetime,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null" >
+        #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskGroupname != null" >
+        #{taskGroupname,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroupname != null" >
+        #{triggerGroupname,jdbcType=VARCHAR},
+      </if>
+      <if test="taskStatus != null" >
+        #{taskStatus,jdbcType=INTEGER},
+      </if>
+      <if test="taskCron != null" >
+        #{taskCron,jdbcType=VARCHAR},
+      </if>
+      <if test="lastExecutetime != null" >
+        #{lastExecutetime,jdbcType=VARCHAR},
+      </if>
+      <if test="parames != null" >
+        #{parames,jdbcType=VARCHAR},
+      </if>
+      <if test="nextExecutetime != null" >
+        #{nextExecutetime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lqcoder.toolset.quartz.model.TaskInfo" >
+    update task_info
+    <set >
+      <if test="taskName != null" >
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null" >
+        trigger_name = #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskGroupname != null" >
+        task_groupname = #{taskGroupname,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroupname != null" >
+        trigger_groupname = #{triggerGroupname,jdbcType=VARCHAR},
+      </if>
+      <if test="taskStatus != null" >
+        task_status = #{taskStatus,jdbcType=INTEGER},
+      </if>
+      <if test="taskCron != null" >
+        task_cron = #{taskCron,jdbcType=VARCHAR},
+      </if>
+      <if test="lastExecutetime != null" >
+        last_executetime = #{lastExecutetime,jdbcType=VARCHAR},
+      </if>
+      <if test="parames != null" >
+        parames = #{parames,jdbcType=VARCHAR},
+      </if>
+      <if test="nextExecutetime != null" >
+        next_executetime = #{nextExecutetime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lqcoder.toolset.quartz.model.TaskInfo" >
+    update task_info
+    set task_name = #{taskName,jdbcType=VARCHAR},
+      trigger_name = #{triggerName,jdbcType=VARCHAR},
+      task_groupname = #{taskGroupname,jdbcType=VARCHAR},
+      trigger_groupname = #{triggerGroupname,jdbcType=VARCHAR},
+      task_status = #{taskStatus,jdbcType=INTEGER},
+      task_cron = #{taskCron,jdbcType=VARCHAR},
+      last_executetime = #{lastExecutetime,jdbcType=VARCHAR},
+      parames = #{parames,jdbcType=VARCHAR},
+      next_executetime = #{nextExecutetime,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR}
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </update>
+</mapper>

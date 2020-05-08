@@ -24,6 +24,8 @@
         <module>redis-cluster</module>
         <module>dubbo-parent</module>
         <module>elastic-search</module>
+        <module>spring-cache</module>
+        <module>springboot-mybatis-plus</module>
     </modules>
 
     <!-- 依赖版本管理 -->

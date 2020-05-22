@@ -4,6 +4,7 @@ import com.bo.springbootinterceptor.common.interceptor.PageInterceptor;
 import com.bo.springbootinterceptor.common.interceptor.Test1Interceptor;
 import com.bo.springbootinterceptor.common.interceptor.Test2Interceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 /**
@@ -33,5 +34,13 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 .addPathPatterns("/page") // 添加拦截路径
                 .order(2);
         super.addInterceptors(registry);
+    }
+    /*
+     *设置视图解析器
+     */
+    @Override
+    protected void addViewControllers(ViewControllerRegistry registry) {
+        //super.addViewControllers(registry);
+        registry.addViewController("/hello").setViewName("hello");
     }
 }

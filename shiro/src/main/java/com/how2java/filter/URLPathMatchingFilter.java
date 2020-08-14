@@ -1,6 +1,7 @@
 package com.how2java.filter;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.servlet.ServletRequest;
@@ -14,59 +15,67 @@ import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.how2java.service.PermissionService;
-import com.how2java.service.impl.PermissionServiceImpl;
 import com.how2java.util.SpringContextUtils;
+import org.springframework.stereotype.Component;
 
+/**
+ * 动态url
+ */
+@Component
 public class URLPathMatchingFilter extends PathMatchingFilter {
-	@Autowired
-	PermissionService permissionService;
+    @Autowired
+    PermissionService permissionService;
 
-	@Override
-	protected boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue)
-			throws Exception {
-		if(null==permissionService) {
-			permissionService = SpringContextUtils.getContext().getBean(PermissionService.class);
-		}
-		
-		String requestURI = getPathWithinApplication(request);
-		System.out.println("requestURI:" + requestURI);
+    @Override
+    protected boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue)
+            throws Exception {
+        if (null == permissionService) {
+            permissionService = SpringContextUtils.getContext().getBean(PermissionService.class);
+        }
 
-		Subject subject = SecurityUtils.getSubject();
-		// 如果没有登录，就跳转到登录页面
-		if (!subject.isAuthenticated()) {
-			WebUtils.issueRedirect(request, response, "/login");
-			return false;
-		}
+        String requestURI = getPathWithinApplication(request);
+        System.out.println("requestURI:" + requestURI);
 
-		// 看看这个路径权限里有没有维护，如果没有维护，一律放行(也可以改为一律不放行)
-		System.out.println("permissionService:"+permissionService);
-		boolean needInterceptor = permissionService.needInterceptor(requestURI);
-		if (!needInterceptor) {
-			return true;
-		} else {
-			boolean hasPermission = false;
-			String userName = subject.getPrincipal().toString();
-			Set<String> permissionUrls = permissionService.listPermissionURLs(userName);
-			for (String url : permissionUrls) {
-				// 这就表示当前用户有这个权限
-				if (url.equals(requestURI)) {
-					hasPermission = true;
-					break;
-				}
-			}
+        Subject subject = SecurityUtils.getSubject();
+        // 如果没有登录，就跳转到登录页面
+        if (!subject.isAuthenticated()) {
+            WebUtils.issueRedirect(request, response, "/login");
+            return false;
+        }
 
-			if (hasPermission) {
-				return true;
-			} else {
-				UnauthorizedException ex = new UnauthorizedException("当前用户没有访问路径 " + requestURI + " 的权限");
+        // 看看这个路径权限里有没有维护，如果没有维护，一律放行(也可以改为一律不放行)
+        System.out.println("permissionService:" + permissionService);
+        boolean needInterceptor = permissionService.needInterceptor(requestURI);
+        if (!needInterceptor) {
+            return true;
+        } else {
+            boolean hasPermission = false;
+            String userName = subject.getPrincipal().toString();
+            Set<String> permissionUrls = permissionService.listPermissionURLs(userName);
+//			Optional<String> first = permissionUrls.stream().filter(perm -> perm.equals(requestURI)).findFirst();
+//			if(first.isPresent()){
+//				return true;
+//			}
+            for (String url : permissionUrls) {
+                // 这就表示当前用户有这个权限
+                if (url.equals(requestURI)) {
+                    hasPermission = true;
+                    break;
+                }
+            }
 
-				subject.getSession().setAttribute("ex", ex);
+            if (hasPermission) {
+                return true;
+            } else {
+                UnauthorizedException ex = new UnauthorizedException("当前用户没有访问路径 " + requestURI + " 的权限");
 
-				WebUtils.issueRedirect(request, response, "/unauthorized");
-				return false;
-			}
+                subject.getSession().setAttribute("ex", ex);
 
-		}
+                WebUtils.issueRedirect(request, response, "/unauthorized");
+                return false;
+            }
 
-	}
+        }
+
+    }
 }

@@ -54,7 +54,7 @@ public class ShiroConfiguration {
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
         //自定义拦截器
         Map<String, Filter> customisedFilter = new HashMap<>();
-        customisedFilter.put("url", getURLPathMatchingFilter());
+        customisedFilter.put("url", geturlpathmatchingfilter());
 
         //配置映射关系
         filterChainDefinitionMap.put("/login", "anon");
@@ -68,7 +68,7 @@ public class ShiroConfiguration {
         return shiroFilterFactoryBean;
     }
     
-    public URLPathMatchingFilter getURLPathMatchingFilter() {
+    public URLPathMatchingFilter geturlpathmatchingfilter() {
     	return new URLPathMatchingFilter();
     }
 

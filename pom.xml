@@ -25,6 +25,7 @@
         <module>springboot-mybatis-plus</module>
         <module>jwt-token</module>
         <module>webflux</module>
+        <module>spring-ioc</module>
     </modules>
 
     <!-- 依赖版本管理 -->

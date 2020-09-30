@@ -17,15 +17,14 @@
 
     <!-- 子模块管理 -->
     <modules>
-        <!-- ShardJdbc 分库分表-->
-        <module>shard-jdbc</module>
         <module>send-email</module>
         <module>swagger-two</module>
         <module>redis-cluster</module>
-        <module>dubbo-parent</module>
         <module>elastic-search</module>
         <module>spring-cache</module>
         <module>springboot-mybatis-plus</module>
+        <module>jwt-token</module>
+        <module>webflux</module>
     </modules>
 
     <!-- 依赖版本管理 -->
@@ -184,11 +183,6 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>tool</groupId>
-                <artifactId>common-util</artifactId>
-                <version>${common-util.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>

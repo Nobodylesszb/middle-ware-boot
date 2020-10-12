@@ -1,6 +1,6 @@
-package com.bo.springbootaop.controller;
+package com.bo.security.controller;
 
-import com.bo.springbootaop.common.aop.ControllerWebLog;
+import com.bo.security.common.aop.ControllerWebLog;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

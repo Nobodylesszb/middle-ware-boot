@@ -1,4 +1,4 @@
-package com.bo.springbootaop.common.aop;
+package com.bo.security.common.aop;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public class WebLogAspect {
     /**
      * 横切点
      */
-    @Pointcut("execution(public * com.bo.springbootaop.controller..*.*(..))")
+    @Pointcut("execution(public * com.bo.security.controller..*.*(..))")
     public void webLog() {
     }
 

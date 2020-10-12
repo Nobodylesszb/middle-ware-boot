@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: spring-security-chapter-one
+
+  security:
+    user:
+      name: admin  # 用户名
+      password: 123456  # 密码

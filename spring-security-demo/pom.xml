@@ -23,6 +23,7 @@
     <modules>
         <module>chapter-one</module>
         <module>chapter-two</module>
+        <module>chapter-three</module>
     </modules>
     <dependencyManagement>
         <dependencies>

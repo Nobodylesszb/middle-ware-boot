@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.muti.data</groupId>
-	<artifactId>source</artifactId>
+	<artifactId>springboot-muti-soruce</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>source</name>
 	<description>multi data source for Spring Boot</description>

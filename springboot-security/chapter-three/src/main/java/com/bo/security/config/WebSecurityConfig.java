@@ -30,6 +30,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
+
+    @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    @Autowired
+    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+    @Autowired
+    private CustomLogoutSuccessHandler logoutSuccessHandler;
 
     /**
      * 使用内置的加密方式，注意，储存在数据库的密码必须和此加密方式一致
@@ -50,17 +59,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.apply(smsCodeAuthenticationSecurityConfig).and().authorizeRequests()
+
+        http.authorizeRequests() //授权配置
                 // 如果有允许匿名的url，填在下面
                 .antMatchers("/sms/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 // 设置登陆页
-                .formLogin().loginPage("/login")
+                .formLogin() //表单登录
+                .loginPage("/login")
+                .successHandler(customAuthenticationSuccessHandler) // 处理登录成功
+                .failureHandler(customAuthenticationFailureHandler) // 处理登录失败
                 // 设置登陆成功页
                 .defaultSuccessUrl("/").permitAll()
                 .and()
-                .logout().permitAll();
+                .logout().permitAll()
+                .and().apply(smsCodeAuthenticationSecurityConfig);
 
         // 关闭CSRF跨域
         http.csrf().disable();

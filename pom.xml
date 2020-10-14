@@ -18,7 +18,7 @@
     <!-- 子模块管理 -->
     <modules>
         <module>send-email</module>
-        <module>swagger-two</module>
+        <module>springboot-swagger</module>
         <module>springboot-mybatis-plus</module>
         <module>jwt-token</module>
         <module>spring-ioc</module>

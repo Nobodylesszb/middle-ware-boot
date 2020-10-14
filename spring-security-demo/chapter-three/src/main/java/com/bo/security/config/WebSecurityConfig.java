@@ -14,6 +14,7 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 /**
  * @auther: bo
@@ -26,86 +27,56 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
-
-    @Autowired
-    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
-    @Autowired
-    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
-    @Autowired
-    private CustomLogoutSuccessHandler logoutSuccessHandler;
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder(new PasswordEncoder() {
-//            @Override
-//            public String encode(CharSequence charSequence) {
-//                return charSequence.toString();
-//            }
-//
-//            @Override
-//            public boolean matches(CharSequence charSequence, String s) {
-//                return s.equals(charSequence.toString());
-//            }
-//        });
-//    }
 
     /**
      * 使用内置的加密方式，注意，储存在数据库的密码必须和此加密方式一致
+     *
      * @param auth
      * @throws Exception
      */
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
-
-    //密码编码器
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public SessionRegistry sessionRegistry() {
-        return new SessionRegistryImpl();
-    }
-
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//    }
+//
+//    //密码编码器
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+//
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.apply(smsCodeAuthenticationSecurityConfig).and().authorizeRequests()
                 // 如果有允许匿名的url，填在下面
-                .antMatchers("/login/invalid").permitAll()
-                .anyRequest().authenticated().and()
+                .antMatchers("/sms/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
                 // 设置登陆页
                 .formLogin().loginPage("/login")
-                .successHandler(customAuthenticationSuccessHandler)
-                .failureHandler(customAuthenticationFailureHandler)
-//                .failureUrl("/login/error")
-//                .defaultSuccessUrl("/")
-                .permitAll().and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessHandler(logoutSuccessHandler)
-                .deleteCookies("JSESSIONID").and()
-                .sessionManagement()
-                .invalidSessionUrl("/login/invalid")
-                .maximumSessions(1)
-                // 当达到最大值时，是否保留已经登录的用户
-                .maxSessionsPreventsLogin(false)
-                // 当达到最大值时，旧用户被踢出后的操作
-                .expiredSessionStrategy(new CustomExpiredSessionStrategy())
-                .sessionRegistry(sessionRegistry());
+                // 设置登陆成功页
+                .defaultSuccessUrl("/").permitAll()
+                .and()
+                .logout().permitAll();
 
         // 关闭CSRF跨域
         http.csrf().disable();
     }
 
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         // 设置拦截忽略文件夹，可以对静态资源放行
+//        StrictHttpFirewall firewall = new StrictHttpFirewall();
+//        //去掉";"黑名单
+//        firewall.setAllowSemicolon(true);
+//        firewall.setAllowUrlEncodedSlash(true);
+        //加入自定义的防火墙
+//        web.httpFirewall(firewall);
         web.ignoring().antMatchers("/css/**", "/js/**");
+//        super.configure(web);
     }
 }

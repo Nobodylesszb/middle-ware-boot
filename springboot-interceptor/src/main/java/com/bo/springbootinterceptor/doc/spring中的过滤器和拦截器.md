@@ -32,7 +32,7 @@ Filter 的销毁，在 Servlet 容器销毁过滤器实例时调用，以释放�
 
 首先我们需要创建一个类，让它实现 Filter 接口，然后重写接口中的方法：
 
-```
+```java
 package com.demo.demofilter.demofilter.filter;
 
 import org.springframework.core.annotation.Order;
@@ -76,7 +76,7 @@ public class DemoFilter implements Filter {
 
 然后创建一个 Controller，对外提供两条请求路径：
 
-```
+```java
 package com.demo.demofilter.demofilter.filter;
 
 import org.springframework.web.bind.annotation.GetMapping;

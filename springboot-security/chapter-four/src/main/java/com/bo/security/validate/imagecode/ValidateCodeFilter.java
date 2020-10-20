@@ -44,7 +44,6 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
                 validateCode(new ServletWebRequest(httpServletRequest));
             } catch (ValidateCodeException e) {
                 authenticationFailureHandler.onAuthenticationFailure(httpServletRequest, httpServletResponse, e);
-                return;
             }
         }
     }

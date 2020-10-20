@@ -39,4 +39,13 @@ public class SmsAuthenticationProvider implements AuthenticationProvider {
     public boolean supports(Class<?> aClass) {
         return SmsAuthenticationToken.class.isAssignableFrom(aClass);
     }
+
+
+    public UserDetailService getUserDetailService() {
+        return userDetailService;
+    }
+
+    public void setUserDetailService(UserDetailService userDetailService) {
+        this.userDetailService = userDetailService;
+    }
 }

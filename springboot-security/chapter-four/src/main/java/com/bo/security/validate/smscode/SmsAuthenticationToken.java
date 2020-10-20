@@ -14,6 +14,17 @@ import java.util.Collection;
 public class SmsAuthenticationToken extends AbstractAuthenticationToken {
     private final Object principal;
 
+    /**
+     * 未认证的token
+     *
+     * @param mobile
+     */
+    public SmsAuthenticationToken(String mobile) {
+        super(null);
+        this.principal = mobile;
+        setAuthenticated(false);
+    }
+
     public SmsAuthenticationToken(Object principal, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;

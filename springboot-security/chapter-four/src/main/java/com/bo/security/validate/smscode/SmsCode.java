@@ -1,38 +1,29 @@
-package com.bo.security.dto;
+package com.bo.security.validate.smscode;
 
-import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
 
-public class ImageCode {
-
-    private BufferedImage image;
-
+/**
+ * @auther: bo
+ * @Date: 2020/10/20 10:58
+ * @version:
+ * @description:
+ */
+public class SmsCode {
     private String code;
-
     private LocalDateTime expireTime;
 
-    public ImageCode(BufferedImage image, String code, int expireIn) {
-        this.image = image;
+    public SmsCode(String code, int expireIn) {
         this.code = code;
         this.expireTime = LocalDateTime.now().plusSeconds(expireIn);
     }
 
-    public ImageCode(BufferedImage image, String code, LocalDateTime expireTime) {
-        this.image = image;
+    public SmsCode(String code, LocalDateTime expireTime) {
         this.code = code;
         this.expireTime = expireTime;
     }
 
-    public boolean isExpire() {
+    boolean isExpire() {
         return LocalDateTime.now().isAfter(expireTime);
-    }
-
-    public BufferedImage getImage() {
-        return image;
-    }
-
-    public void setImage(BufferedImage image) {
-        this.image = image;
     }
 
     public String getCode() {

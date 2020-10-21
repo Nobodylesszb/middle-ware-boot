@@ -1,6 +1,7 @@
 package com.bo.security;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @auther: bo
@@ -8,6 +9,7 @@ import org.springframework.boot.SpringApplication;
  * @version:
  * @description:
  */
+@SpringBootApplication
 public class SecurityApplication {
     public static void main(String[] args) {
         SpringApplication.run(SecurityApplication.class, args);

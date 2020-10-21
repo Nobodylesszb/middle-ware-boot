@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @description:
  */
 @SpringBootApplication
-@MapperScan(value = "com.bo.shirojwt.mapper")
+@MapperScan(value = "com.bo.shiro.mapper")
 public class ShiroJwtApplication {
     public static void main(String[] args) {
         SpringApplication.run(ShiroJwtApplication.class, args);

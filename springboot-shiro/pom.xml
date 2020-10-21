@@ -13,6 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>SpringBoot-Shiro-Guide</module>
+        <module>SpringBoot-Shiro-JWT</module>
     </modules>
     <artifactId>springboot-shiro</artifactId>
     <properties>

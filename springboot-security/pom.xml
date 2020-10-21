@@ -26,6 +26,7 @@
         <module>chapter-three</module>
         <module>chapter-four</module>
         <module>Spring-Security-Oauth2-Guide</module>
+        <module>Spring-Security-Oauth2-Customize</module>
     </modules>
     <dependencyManagement>
         <dependencies>

@@ -22,14 +22,10 @@ import java.util.Set;
  * @version:
  * @description:
  */
-@Component
-public class CustomRealm extends AuthorizingRealm {
-    private final UserMapper userMapper;
 
+public class CustomRealm extends AuthorizingRealm {
     @Autowired
-    public CustomRealm(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
+    private UserMapper userMapper;
 
     /**
      * 必须重写此方法，不然会报错

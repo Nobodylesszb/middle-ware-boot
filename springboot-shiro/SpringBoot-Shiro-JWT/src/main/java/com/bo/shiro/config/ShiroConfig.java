@@ -2,6 +2,7 @@ package com.bo.shiro.config;
 
 import com.bo.shiro.filter.JwtFilter;
 import com.bo.shiro.shiro.CustomRealm;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SecurityManager;
@@ -10,6 +11,7 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -42,6 +44,14 @@ public class ShiroConfig {
         filterRuleMap.put("/unauthorized/**", "anon");
         factoryBean.setFilterChainDefinitionMap(filterRuleMap);
         return factoryBean;
+    }
+
+    @Bean
+    public CustomRealm myRealm(@Qualifier("credentialsMatcher") HashedCredentialsMatcher credentialMatcher) {
+        CustomRealm myRealm = new CustomRealm();
+        //未加密
+//        myRealm.setCredentialsMatcher(credentialMatcher);
+        return myRealm;
     }
 
     /**
@@ -87,5 +97,15 @@ public class ShiroConfig {
     @Bean
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
+    }
+
+    @Bean("credentialsMatcher")
+    public HashedCredentialsMatcher credentialsMatcher() {
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        // 密码加密算法
+        hashedCredentialsMatcher.setHashAlgorithmName("MD5");
+        // 加密次数
+        hashedCredentialsMatcher.setHashIterations(512);
+        return hashedCredentialsMatcher;
     }
 }

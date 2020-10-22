@@ -21,7 +21,7 @@ import java.net.URLEncoder;
  * @description:
  */
 @Slf4j
-public class JWTFilter extends BasicHttpAuthenticationFilter {
+public class JwtFilter extends BasicHttpAuthenticationFilter {
     /**
      * 如果带有 token，则对 token 进行检查，否则直接通过
      */

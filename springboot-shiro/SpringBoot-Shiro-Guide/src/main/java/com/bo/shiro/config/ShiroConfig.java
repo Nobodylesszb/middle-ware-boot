@@ -23,7 +23,7 @@ public class ShiroConfig {
      * user 和 authc 的不同：当应用开启了rememberMe时, 用户下次访问时可以是一个user, 但绝不会是authc,
      * 因为authc是需要重新认证的, user表示用户不一定已通过认证, 只要曾被Shiro记住过登录状态的用户就可以正常发起请求,比如rememberMe
      * 以前的一个用户登录时开启了rememberMe, 然后他关闭浏览器, 下次再访问时他就是一个user, 而不会authc
-     *
+     * <p>
      * ShiroFilterFactoryBean 的时候需要注入 SecurityManager
      */
     @Bean
@@ -63,7 +63,7 @@ public class ShiroConfig {
     @Bean
     public DefaultWebSecurityManager securityManager(CustomRealm customRealm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        // 设置realm.
+        // 设置realm. 此realm未加密
         securityManager.setRealm(customRealm);
         return securityManager;
     }

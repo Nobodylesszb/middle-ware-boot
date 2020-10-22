@@ -72,4 +72,12 @@ public class JWTUtil {
             return null;
         }
     }
+
+    public static void main(String[] args) {
+        String token = JWTUtil.createToken("test");
+        System.out.println(token);
+        boolean bool = JWTUtil.verify("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDM0MTcwNzgsInVzZXJuYW1lIjoidGVzdCJ9.TgZAewGaY9_9FSQgGqFUuecNWwME46dtBoZzZSaixab", "test");
+        System.out.println(bool);
+
+    }
 }

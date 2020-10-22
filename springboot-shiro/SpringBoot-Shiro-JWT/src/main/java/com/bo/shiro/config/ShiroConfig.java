@@ -87,6 +87,10 @@ public class ShiroConfig {
         return defaultAdvisorAutoProxyCreator;
     }
 
+
+    /**
+     * 启用shiro注解
+     */
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();

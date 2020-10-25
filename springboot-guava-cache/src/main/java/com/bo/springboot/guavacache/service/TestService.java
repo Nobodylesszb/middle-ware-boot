@@ -46,4 +46,38 @@ public class TestService {
         }
         return null;
     }
+
+
+    public String test2(Long id) {
+        try {
+            String o = (String) test1.get(id, () -> {
+                if (id / 3 == 0) {
+                    return Optional.empty();
+                }
+                String s = UUID.randomUUID().toString();
+                return Optional.of(s);
+            }).orElse(null);
+            return o;
+        } catch (ExecutionException e) {
+            log.error(e.getMessage());
+        }
+        return null;
+    }
+
+
+    public String test3(Long id) {
+        try {
+            String o = (String) test1.get(id, () -> {
+                if (id / 5 == 0) {
+                    return Optional.empty();
+                }
+                String s = UUID.randomUUID().toString();
+                return Optional.of(s);
+            }).orElse(null);
+            return o;
+        } catch (ExecutionException e) {
+            log.error(e.getMessage());
+        }
+        return null;
+    }
 }

@@ -2,10 +2,7 @@ package com.bo.springboot.guavacache.controller;
 
 import com.bo.springboot.guavacache.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @auther: bo
@@ -23,5 +20,15 @@ public class TestController {
     @GetMapping("/test1/{id}")
     public String test1(@PathVariable(value = "id") Long id) {
         return testService.test1(id);
+    }
+
+    /**
+     * 更新缓存用切面来做
+     * @param id
+     * @return
+     */
+    @PostMapping("/test1/{id}")
+    public String Savatest1(@PathVariable(value = "id") Long id) {
+        return "已经更新了缓存";
     }
 }

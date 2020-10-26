@@ -50,7 +50,7 @@ public class TestService {
 
     public String test2(Long id) {
         try {
-            String o = (String) test1.get(id, () -> {
+            String o = (String) test2.get(id, () -> {
                 if (id % 3 == 0) {
                     return Optional.empty();
                 }
@@ -67,7 +67,7 @@ public class TestService {
 
     public String test3(Long id) {
         try {
-            String o = (String) test1.get(id, () -> {
+            String o = (String) test3.get(id, () -> {
                 if (id % 5 == 0) {
                     return Optional.empty();
                 }

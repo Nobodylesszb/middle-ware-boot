@@ -31,9 +31,11 @@ public class KafkaProducerConfig {
         configProps.put(
                 ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 bootstrapServers);
+        //设置key序列化策略
         configProps.put(
                 ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
                 StringSerializer.class);
+        //设置value序列化策略
         configProps.put(
                 ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
                 JsonSerializer.class);

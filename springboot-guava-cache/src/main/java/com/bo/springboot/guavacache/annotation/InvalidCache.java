@@ -19,7 +19,7 @@ public @interface InvalidCache {
     //缓存要失效的参数名字
     String invalid() default "";
 
-    //前端传入的对象
+    //前端传入的对象名字
     String IncomingObjectName() default "";
 
     //前端传入的对象

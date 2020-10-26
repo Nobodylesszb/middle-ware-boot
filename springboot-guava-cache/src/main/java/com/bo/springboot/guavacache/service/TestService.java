@@ -34,7 +34,7 @@ public class TestService {
     public String test1(Long id) {
         try {
             String o = (String) test1.get(id, () -> {
-                if (id / 2 == 0) {
+                if (id % 2 == 0) {
                     return Optional.empty();
                 }
                 String s = UUID.randomUUID().toString();
@@ -51,7 +51,7 @@ public class TestService {
     public String test2(Long id) {
         try {
             String o = (String) test1.get(id, () -> {
-                if (id / 3 == 0) {
+                if (id % 3 == 0) {
                     return Optional.empty();
                 }
                 String s = UUID.randomUUID().toString();
@@ -68,7 +68,7 @@ public class TestService {
     public String test3(Long id) {
         try {
             String o = (String) test1.get(id, () -> {
-                if (id / 5 == 0) {
+                if (id % 5 == 0) {
                     return Optional.empty();
                 }
                 String s = UUID.randomUUID().toString();

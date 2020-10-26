@@ -11,7 +11,7 @@
     <groupId>com.bo.springboot</groupId>
     <artifactId>guava-cache</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>guava-cache</name>
+    <name>springboot-guava-cache</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

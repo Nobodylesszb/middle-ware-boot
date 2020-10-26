@@ -13,5 +13,15 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface InvalidCache {
-    String name() default "";
+    //缓存的名字
+    String[] name() default {};
+
+    //缓存要失效的参数名字
+    String invalid() default "";
+
+    //前端传入的对象
+    String IncomingObjectName() default "";
+
+    //前端传入的对象
+    Class IncomingObject();
 }

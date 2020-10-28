@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @description:
  */
 @Data
-public class SysUser implements Serializable {
+public class SysUser {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -29,7 +29,5 @@ public class SysUser implements Serializable {
      */
     private String password;
 
-    public SysUser() {
-    }
 
 }

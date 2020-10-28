@@ -3,6 +3,8 @@ package com.bo.springboot.controller;
 import com.bo.springboot.entity.SysUser;
 import com.bo.springboot.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,8 +43,8 @@ public class UserController {
      * @param user
      * @return
      */
-    @RequestMapping("/insertUser")
-    public String insertUser(SysUser user) {
+    @PostMapping("/insertUser")
+    public String insertUser(@RequestBody SysUser user) {
         userService.insertUser(user);
         return "insert success";
     }

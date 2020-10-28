@@ -5,10 +5,7 @@ import com.bo.springboot.dao.SysUserDAO;
 import com.bo.springboot.entity.SysUser;
 import com.bo.springboot.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +30,7 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
+    @Cacheable("userList") // 标志读取缓存操作，如果缓存不存在，则调用目标方法，并将结果放入缓存
     public List<SysUser> getAll() {
         return sysUserDAO.list();
     }
@@ -45,7 +43,9 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    @CachePut(cacheNames = {"user"}, key = "#sysUser.id")//写入缓存，key为user.id,一般该注解标注在新增方法上
+//    @CachePut(cacheNames = {"user"}, key = "#sysUser.id")//写入缓存，key为user.id,一般该注解标注在新增方法上
+//    @CacheEvict(cacheNames = {"userList"})
+    @Caching(put = {@CachePut(cacheNames = {"user"}, key = "#sysUser.id")}, evict = {@CacheEvict(cacheNames = {"userList"}, allEntries = true)})
     public Boolean insertUser(SysUser sysUser) {
         return sysUserDAO.save(sysUser);
     }

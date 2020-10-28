@@ -16,13 +16,17 @@ public interface SysUserService {
 
     List<SysUser> getAll();
 
-    SysUser getOne(Long  id);
+    SysUser getOne(Long id);
 
-    boolean insertUser(SysUser sysUser);
+    Boolean insertUser(SysUser sysUser);
 
-    Boolean updateUser(SysUser  sysUser);
+    Boolean updateUser(SysUser sysUser);
 
-    Boolean deleteUser(SysUser  sysUser);
+    Boolean deleteUser(SysUser sysUser);
+
+    Boolean deleteAll1();
+
+    Boolean deleteAll2();
 
 
 }

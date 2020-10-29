@@ -3,6 +3,7 @@ package com.bo.springboot.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
@@ -23,8 +24,13 @@ import java.util.Map;
  */
 public class RedisConfig {
 
+    /**
+     * springcache集成redis需要集成到cacheManage
+     * @param redisConnectionFactory
+     * @return
+     */
     @Bean
-    public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
+    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
         return new RedisCacheManager(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory), this.getRedisCacheConfigurationWithTtl( 60), this.getRedisCacheConfigurationMap() // 指定 key 策略
         );
     }

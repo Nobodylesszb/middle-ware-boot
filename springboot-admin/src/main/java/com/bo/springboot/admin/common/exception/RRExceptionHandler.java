@@ -71,12 +71,6 @@ public class RRExceptionHandler {
 		return R.error("没有权限，请联系管理员授权");
 	}
 
-	@ExceptionHandler(Exception.class)
-	public R handleException(Exception e){
-		logger.error(e.getMessage(), e);
-		return R.error();
-	}
-
 
 	/**
 	 * 全局异常捕捉处理

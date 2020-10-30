@@ -6,8 +6,8 @@ server:
       min-spare: 30
       max: 1000
   port: 8080
-  servlet:
-    context-path: /bo
+#  servlet:
+#    context-path: /bo
 
 spring:
   # 环境 dev|test|prod

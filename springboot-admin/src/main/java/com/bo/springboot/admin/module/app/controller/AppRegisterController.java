@@ -38,7 +38,7 @@ public class AppRegisterController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("register")
+    @PostMapping("/register")
     @ApiOperation("注册")
     public R register(@Valid @RequestBody RegisterForm form){
         UserEntity user = new UserEntity();

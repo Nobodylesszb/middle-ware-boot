@@ -1,4 +1,4 @@
-package com.bo.springboot.admin.module.app.service;
+package com.bo.springboot.admin.module.app.interceptor;
 
 import com.bo.springboot.admin.common.exception.RRException;
 import com.bo.springboot.admin.module.app.annotation.Login;

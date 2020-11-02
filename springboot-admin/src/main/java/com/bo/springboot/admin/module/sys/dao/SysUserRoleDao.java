@@ -11,6 +11,7 @@ package com.bo.springboot.admin.module.sys.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.bo.springboot.admin.module.sys.entity.SysUserRoleEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,11 +26,11 @@ public interface SysUserRoleDao extends BaseMapper<SysUserRoleEntity> {
 	/**
 	 * 根据用户ID，获取角色ID列表
 	 */
-	List<Long> queryRoleIdList(Long userId);
+	List<Long> queryRoleIdList(@Param("userId") Long userId);
 
 
 	/**
 	 * 根据角色ID数组，批量删除
 	 */
-	int deleteBatch(Long[] roleIds);
+	int deleteBatch(@Param("roleIds") Long[] roleIds);
 }

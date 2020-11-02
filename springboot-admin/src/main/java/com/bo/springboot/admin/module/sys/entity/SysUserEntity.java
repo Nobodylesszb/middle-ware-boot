@@ -14,7 +14,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.bo.springboot.admin.common.validator.group.AddGroup;
 import com.bo.springboot.admin.common.validator.group.UpdateGroup;
 import lombok.Data;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;

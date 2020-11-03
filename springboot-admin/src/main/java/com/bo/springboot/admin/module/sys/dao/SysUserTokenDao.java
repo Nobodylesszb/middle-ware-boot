@@ -11,6 +11,7 @@ package com.bo.springboot.admin.module.sys.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.bo.springboot.admin.module.sys.entity.SysUserTokenEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 系统用户Token
@@ -20,6 +21,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SysUserTokenDao extends BaseMapper<SysUserTokenEntity> {
 
-    SysUserTokenEntity queryByToken(String token);
+    SysUserTokenEntity queryByToken(@Param("token") String token);
 	
 }

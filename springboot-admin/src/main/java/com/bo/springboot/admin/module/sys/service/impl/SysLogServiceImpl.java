@@ -9,6 +9,7 @@ import com.bo.springboot.admin.module.sys.dao.SysLogDao;
 import com.bo.springboot.admin.module.sys.entity.SysLogEntity;
 import com.bo.springboot.admin.module.sys.service.SysLogService;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import java.util.Map;
  * @version:
  * @description:
  */
+@Service
 public class SysLogServiceImpl extends ServiceImpl<SysLogDao, SysLogEntity> implements SysLogService {
     @Override
     public PageUtils queryPage(Map<String, Object> params) {

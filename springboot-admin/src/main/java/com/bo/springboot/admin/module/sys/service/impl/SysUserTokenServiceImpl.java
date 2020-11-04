@@ -6,6 +6,7 @@ import com.bo.springboot.admin.module.sys.dao.SysUserTokenDao;
 import com.bo.springboot.admin.module.sys.entity.SysUserTokenEntity;
 import com.bo.springboot.admin.module.sys.oauth2.TokenGenerator;
 import com.bo.springboot.admin.module.sys.service.SysUserTokenService;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.Objects;
@@ -16,6 +17,7 @@ import java.util.Objects;
  * @version:
  * @description:
  */
+@Service
 public class SysUserTokenServiceImpl extends ServiceImpl<SysUserTokenDao, SysUserTokenEntity> implements SysUserTokenService {
     //12小时后过期
     private final static int EXPIRE = 3600 * 12;

@@ -23,4 +23,5 @@ public interface SysUserTokenService extends IService<SysUserTokenEntity> {
      * @param userId  用户ID
      */
     void logout(long userId);
+
 }

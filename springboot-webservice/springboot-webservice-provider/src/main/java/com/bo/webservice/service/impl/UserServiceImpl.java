@@ -1,5 +1,6 @@
 package com.bo.webservice.service.impl;
 
+
 import com.bo.webservice.constant.WsConst;
 import com.bo.webservice.dto.UserDto;
 import com.bo.webservice.service.UserService;
@@ -7,14 +8,8 @@ import com.oracle.tools.packager.Log;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import java.util.ArrayList;
 import java.util.List;
-
-/**
- * @auther: bo
- * @Date: 2020/11/13 14:05
- * @version:
- * @description:
- */
 
 @WebService(
         targetNamespace = WsConst.NAMESPACE_URI, //wsdl命名空间
@@ -23,18 +18,19 @@ import java.util.List;
         portName = "userPortName",             //port名称
         endpointInterface = "com.bo.webservice.service.UserService")//指定发布webservcie的接口类，此类也需要接入@WebService注解
 public class UserServiceImpl implements UserService {
+
     @Override
-    public UserDto get(@WebParam(name = "id") String id) {
-        if (null == id) {
-            return null;
+    public UserDto get(@WebParam(name = "id") String id){
+        if(null==id){
+            return  null;
         }
 
-        List<UserDto> list = getData();
-        UserDto UserDto = null;
-        for (UserDto user : list
-        ) {
-            if (id.equals(user.getUserId().toString())) {
-                UserDto = user;
+        List<UserDto> list= getData();
+        UserDto UserDto=null;
+        for (UserDto user:list
+                ) {
+            if(id.equals(user.getUserId().toString())){
+                UserDto=user;
                 break;
             }
         }
@@ -43,66 +39,67 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> list() {
-        List<UserDto> list = null;
+    public List<UserDto> list(){
+        List<UserDto> list=new ArrayList<>();
 
-        list = getData();
+        list=getData();
 
         return list;
     }
 
     @Override
-    public int count() {
+    public int count(){
         return getData().size();
     }
 
     @Override
-    public int save(UserDto user) {
+    public int save(UserDto user){
         Log.info(user.toString());
         return 1;
     }
 
     @Override
-    public int update(UserDto user) {
+    public int update(UserDto user){
         return 1;
     }
 
     @Override
-    public int remove(Integer id) {
+    public int remove(Integer id){
         return 1;
     }
 
     @Override
-    public int batchRemove(Integer[] ids) {
+    public int batchRemove(Integer[] ids){
         return 1;
     }
 
     /**
      * 模拟一组数据
-     */
-    private List<UserDto> getData() {
-        List<UserDto> list = null;
+     * */
+    private List<UserDto> getData(){
+        List<UserDto> list=new ArrayList<>();
 
-        UserDto UserDto = new UserDto();
+        UserDto UserDto=new UserDto();
         UserDto.setUserId(1);
         UserDto.setUserName("admin");
         list.add(UserDto);
 
-        UserDto = new UserDto();
+        UserDto=new UserDto();
         UserDto.setUserId(2);
         UserDto.setUserName("heike");
         list.add(UserDto);
 
-        UserDto = new UserDto();
+        UserDto=new UserDto();
         UserDto.setUserId(3);
         UserDto.setUserName("tom");
         list.add(UserDto);
 
-        UserDto = new UserDto();
+        UserDto=new UserDto();
         UserDto.setUserId(4);
         UserDto.setUserName("mac");
         list.add(UserDto);
 
-        return list;
+        return  list;
     }
+
 }

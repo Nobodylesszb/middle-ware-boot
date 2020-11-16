@@ -20,5 +20,6 @@
     </properties>
     <modules>
         <module>springboot-webservice-provider</module>
+        <module>springboot-webservice-client</module>
     </modules>
 </project>

@@ -5,6 +5,7 @@ import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @auther: bo
@@ -12,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @version:
  * @description:
  */
-@Controller
-@RequestMapping("/")
+@RestController
+@RequestMapping("/test")
 public class TestController {
 
     @GetMapping
-    public void test() {
+    public String test() {
         JaxWsDynamicClientFactory dcflient = JaxWsDynamicClientFactory.newInstance();
 
         Client client = dcflient.createClient("http://localhost:8080/ws/user?wsdl");
@@ -31,5 +32,6 @@ public class TestController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return "success";
     }
 }

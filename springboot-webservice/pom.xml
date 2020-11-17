@@ -21,5 +21,6 @@
     <modules>
         <module>springboot-webservice-provider</module>
         <module>springboot-webservice-client</module>
+        <module>springboot-webservice-clientxfire</module>
     </modules>
 </project>

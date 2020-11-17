@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * 数据库访问层 用户Dao t_user
  *
- * @author fishpro
+ * @author bo
  */
 @Mapper
 public interface UserDao {

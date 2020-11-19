@@ -1,0 +1,5 @@
+server:
+  port: 8001
+
+bo:
+  uploadPath: /Users/go/Desktop/upload/

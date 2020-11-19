@@ -25,6 +25,7 @@
         <module>springboot-mybatis</module>
         <module>springboot-sendemail</module>
         <module>springboot-throwException</module>
+        <module>springboot-import</module>
     </modules>
 
     <!-- 依赖版本管理 -->

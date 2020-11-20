@@ -1,0 +1,17 @@
+server:
+  port: 7089
+
+profiles:
+     name: prod
+
+spring:
+    data:
+      mongodb:
+        uri: mongodb://mongodb:27017
+        database: test
+
+    datasource:
+             driver-class-name: com.mysql.jdbc.Driver
+             url: jdbc:mysql://mysql:3306/test?useUnicode=true&amp;characterEncoding=UTF-8
+             username: root
+             password: root

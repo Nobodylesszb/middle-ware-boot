@@ -1,0 +1,7 @@
+server:
+  port: 7089
+
+spring:
+  profiles:
+    active: dev
+

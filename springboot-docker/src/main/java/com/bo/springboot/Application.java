@@ -1,6 +1,7 @@
 package com.bo.springboot;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @auther: bo
@@ -8,8 +9,10 @@ import org.springframework.boot.SpringApplication;
  * @version:
  * @description:
  */
+@SpringBootApplication
 public class Application {
     public static void main(String[] args) {
+
         SpringApplication.run(Application.class);
     }
 }

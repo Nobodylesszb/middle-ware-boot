@@ -1,0 +1,12 @@
+FROM openjdk:8-jdk-alpine
+
+VOLUME /tmp
+
+ADD springboot-docker-0.0.1-SNAPSHOT.jar springboot-docker.jar
+
+#设置镜像的时区,避免出现8小时的误差
+ENV TZ=Asia/Shanghai
+
+EXPOSE 7089
+
+ENTRYPOINT ["java","-Xms256m","-Xmx512m","-Dspring.profiles.active=prod","-jar","springboot-docker.jar"]

@@ -1,0 +1,20 @@
+spring:
+  activiti:
+    check-process-definitions: false
+    db-identity-used: false
+    database-schema-update: true
+  #    数据源配置
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3305/bpm?useSSL=false&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: wjn1994123605zb
+
+server:
+  port: 8086
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: mybatis/**/*Mapper.xml
+  type-aliases-package: com.bo.**.domain

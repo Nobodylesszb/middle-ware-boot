@@ -27,4 +27,14 @@ public class RuntimeTaskService {
     public List<Task> queryByName(String name) {
         return taskService.createTaskQuery().taskCandidateUser(name).list();
     }
+
+    /**
+     * 分配任务
+     * @param task
+     * @return
+     */
+    public Boolean claimTask(Task task) {
+        taskService.addCandidateUser(task.getId(), "xxx");
+        return true;
+    }
 }

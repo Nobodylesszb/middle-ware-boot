@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/deploy")
+@SuppressWarnings("all")
 public class DeployController {
 
     @Autowired
     private RepositoryService repositoryService;
 
 
-    @GetMapping("/FinancialReportProcess")
+    @GetMapping("/test")
     public String testFinancialReportProcess() {
         ClassPathResource classPathResource = new ClassPathResource("bpmn/FinancialReportProcess.bpmn20.xml", this.getClass().getClassLoader());
         Deployment deployment = repositoryService.createDeployment()

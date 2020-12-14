@@ -1,6 +1,6 @@
 # server
 server:
-  port: 8080
+  port: 8081
 
   servlet:
     session:
@@ -14,4 +14,11 @@ spring:
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
+
+
+deepxi:
+  iam:
+    login:
+      log:
+        url: "http://localhost:9302/deepexi-staff-iam-openapi/api/v1.0/operatelog"
 

@@ -1,12 +1,10 @@
 package com.jwt.token.demo.interceptor;
 
-import com.alibaba.fastjson.JSON;
-import com.jwt.token.demo.common.Payload;
+
 import com.jwt.token.demo.config.JwtConfig;
 import com.jwt.token.demo.exceptions.NonLoginException;
 import com.jwt.token.demo.utils.ThreadLocalUtils;
 import io.jsonwebtoken.Claims;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

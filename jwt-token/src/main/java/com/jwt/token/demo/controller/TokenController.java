@@ -1,19 +1,21 @@
 package com.jwt.token.demo.controller;
 
+import com.jwt.token.demo.common.Payload;
 import com.jwt.token.demo.config.JwtConfig;
+import com.jwt.token.demo.utils.ThreadLocalUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/user")
 public class TokenController {
     @Resource
-    private JwtConfig jwtConfig ;
+    private JwtConfig jwtConfig;
+
     /*
      * 返参格式
      * {
@@ -25,20 +27,21 @@ public class TokenController {
      */
     // 拦截器直接放行，返回Token
     @PostMapping("/login")
-    public Map<String,String> login (@RequestParam("userName") String userName,
-                                     @RequestParam("passWord") String passWord){
-        Map<String,String> result = new HashMap<>() ;
+    public Map<String, String> login(@RequestParam("userName") String userName,
+                                     @RequestParam("passWord") String passWord) {
+        Map<String, String> result = new HashMap<>();
         // 省略数据源校验
-        String token = jwtConfig.getToken(userName+passWord) ;
+        String token = jwtConfig.getToken(userName);
         if (!StringUtils.isEmpty(token)) {
-            result.put("token",token) ;
+            result.put("token", token);
         }
-        result.put("userName",userName) ;
-        return result ;
+        result.put("userName", userName);
+        return result;
     }
+
     // 需要 Token 验证的接口
-    @PostMapping("/info")
-    public String info (){
-        return "info" ;
+    @GetMapping("/info")
+    public Payload<String> info() {
+        return new Payload<>(ThreadLocalUtils.getUser());
     }
 }

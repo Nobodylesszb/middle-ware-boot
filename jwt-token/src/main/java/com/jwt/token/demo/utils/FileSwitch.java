@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class FileSwitch {
 
-    public static String validFilePath(String filepath) throws Exception {
+    public static String validFilePath(String filepath) {
 
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("a", "a");
@@ -96,7 +96,7 @@ public class FileSwitch {
 
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         String s = FileSwitch.validFilePath("http://www.baidu.com");
         System.out.println(s);
     }

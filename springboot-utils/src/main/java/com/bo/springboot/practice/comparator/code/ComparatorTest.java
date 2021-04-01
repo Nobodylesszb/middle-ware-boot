@@ -1,5 +1,6 @@
 package com.bo.springboot.practice.comparator.code;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -53,7 +54,7 @@ public class ComparatorTest {
         employees.add(null);  //插入一个null元素
         employees.sort(Comparator.nullsFirst(Comparator.comparing(Employee::getName)));
         employees.forEach(System.out::println);
-
+        employees.removeIf((x)->x.getName().startsWith("a"));
 
         employees.sort(Comparator.nullsLast(Comparator.comparing(Employee::getName)));
         employees.forEach(System.out::println);

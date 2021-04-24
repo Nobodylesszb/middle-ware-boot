@@ -1,5 +1,6 @@
 package com.bo.springboot.controller;
 
+import cn.hutool.core.util.ZipUtil;
 import com.bo.springboot.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.*;
 
 /**
@@ -49,6 +51,32 @@ public class FileController {
 
         }
 
+
+        return map;
+    }
+
+    /**
+     * 单文件
+     */
+    @PostMapping("/uploadzip")
+    @ResponseBody
+    public Object uploadZip(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+        Map<String, Object> map = new HashMap();
+        map.put("status", 0);
+        String fileName;
+        fileName = UUID.randomUUID().toString(); //对文件名称重命名
+
+        try {
+            File convFile = new File("/Users/bo/Documents/work/test/2/upload/"+Objects.requireNonNull(file.getOriginalFilename()));
+            file.transferTo(convFile);
+            File unzip = ZipUtil.unzip(convFile, new File("/Users/bo/Documents/work/test/2/test/"));
+            map.put("filename", unzip.getAbsolutePath());
+            FileUtil.deleteFile(convFile.getAbsolutePath());
+        } catch (Exception e) {
+            map.put("status", -1);
+            map.put("message", e.getMessage());
+
+        }
 
         return map;
     }

@@ -1,0 +1,122 @@
+// 镜像构建tag
+def originTag = ''
+// 推送镜像tag
+def pushTag = ''
+def IMAGE_ARTIFACTS = [:]
+def JAR_ARTIFACTS = [:]
+def originJarName = ''
+def d2sfToken = ''
+
+timeout(time: '60') {
+    podTemplate(label: 'jenkins-worker-971', cloud: 'INTERNAL-CLOUD-KUBERNETES',
+        containers: [
+            containerTemplate(
+                name: 'jnlp', image: 'deploy.deepexi.com/2048-public/jenkins/jnlp-slave:4.0.1-1', ttyEnabled: true, args: '${computer.jnlpmac} ${computer.name}',
+                resourceRequestCpu: '100m', resourceRequestMemory: '256Mi'
+            ),
+            containerTemplate(name: 'docker-container', image: 'deploy.deepexi.com/2048-public/docker:stable', ttyEnabled: true, command: 'cat'),
+            containerTemplate(name: 'language-tool-container', image: 'deploy.deepexi.com/2048-public/maven:3.6.3-jdk-8', ttyEnabled: true, command: 'cat'),
+        ],
+        volumes: [
+            hostPathVolume(hostPath: '/var/run/docker.sock', mountPath:'/var/run/docker.sock'),
+            hostPathVolume(hostPath: '/root/.sonar/cache', mountPath:'/root/.sonar/cache'),
+            hostPathVolume(hostPath: '/root/.m2', mountPath:'/root/.m2'),
+            hostPathVolume(hostPath: '/root/.npm', mountPath:'/root/.npm'),
+            hostPathVolume(hostPath: '/etc/docker/certs.d', mountPath:'/data/certs')
+        ]
+    ) {
+        node('jenkins-worker-971') {
+            stage('代码检出_160666') {
+    echo 'git clone start.'
+
+    try {
+        sh 'rm -rf vivo-test'
+        withCredentials([string(credentialsId: 'GitLab-vivotest-1239', variable: 'ACCESS_TOKEN')]) {
+            def oauthAddr = 'https://gitlab.deepexi.com/cloud-native-project-delivery/vivo-test.git'.replace("://", "://oauth2:${ACCESS_TOKEN}@");
+            sh "git clone -b master ${oauthAddr}"
+        }
+    } catch (Throwable exc) {
+        echo 'git clone failure.'
+    }
+    echo 'git clone success.'
+}
+
+            stage('构建应用_160667') {
+    echo 'project package start.'
+
+
+    try {
+        container('language-tool-container') {
+            sh('cd vivo-test \n mvn -B clean package -U -Dmaven.test.skip=true -Dautoconfig.skip -Djib.skip')
+        }
+    } catch (Throwable exc) {
+        echo 'project package failure.'
+    }
+
+    echo 'project package success.'
+}
+
+            stage('构建镜像_160668') {
+    echo 'docker build images start.'
+
+    try {
+        // 若originTag已被赋值，BUILD_IMAGE跳过执行
+        if (originTag != '') {
+            println("tag has already been built, current stage will be ignored.")
+            return;
+        }
+
+        def imageName = 'vivotest';
+        if (imageName == '') {
+            throw new Exception('Image name must be specified!')
+        }
+        println("use imageName: " %2B "${imageName}")
+
+        def imageVersion = '0.2';
+        if (imageVersion == '') {
+            throw new Exception('Image version must be specified!')
+        }
+        println("use imageVersion: " %2B "${imageVersion}")
+
+        // 为全局变量originTag的赋值
+        originTag = "$imageName:$imageVersion"
+        println("build image tag : " %2B "${originTag}")
+        container('docker-container') {
+            sh("cd vivo-test \n docker build -f ./Dockerfile -t $originTag .")
+        }
+    } catch (Throwable exc) {
+        echo 'docker build images failure.'
+    }
+
+    echo 'docker build images success'
+}
+
+            stage('推送制品_160669') {
+    echo 'artifact push start.'
+
+    try {
+        if (originTag == '') {
+            throw new Exception('Image not found,You should BUILD_IMAGE before PUSH_IMAGE.');
+        }
+
+        // 推送镜像tag
+        pushTag = "deploy.deepexi.com/project_delivery/$originTag"
+        container('docker-container') {
+            sh("docker tag $originTag $pushTag")
+            withCredentials([usernamePassword(credentialsId: 'Harbor-harbor-1240', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                sh("docker login -u ${USERNAME} -p ${PASSWORD} deploy.deepexi.com")
+            }
+            sh("docker push $pushTag")
+            IMAGE_ARTIFACTS.put('推送制品.IMAGE_ARTIFACTS', pushTag)
+            println("Putting artifact which use 推送制品.IMAGE_ARTIFACTS as Key into IMAGE_ARTIFACTS.")
+        }
+    } catch (Throwable exc) {
+        echo 'artifact push failure.'
+    }
+
+    echo 'artifact push success.'
+}
+
+        }
+    }
+}

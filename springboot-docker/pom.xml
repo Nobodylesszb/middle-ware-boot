@@ -13,7 +13,7 @@
         <docker.image.prefix>springboot</docker.image.prefix>
         <!--docker插件-->
         <!-- docker私服地址,Harbor配置完默认地址就是80,默认不带端口号。但是我这里是81 -->
-        <docker.repostory>10.211.55.13/</docker.repostory>
+        <docker.repostory>http://10.211.55.13:80</docker.repostory>
         <!--项目名,需要和Harbor中的项目名称保持一致 -->
         <docker.registry.name>test</docker.registry.name>
     </properties>
@@ -105,9 +105,9 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>registry.cn-shanghai.aliyuncs.com/xxxxx/xxxxx</repository>
-                    <username>userName</username>
-                    <password>userPassword</password>
+                    <repository>${docker.repostory}/${docker.registry.name}/${project.artifactId}</repository>
+                    <username>admin</username>
+                    <password>521524</password>
                     <buildArgs>
                         <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>

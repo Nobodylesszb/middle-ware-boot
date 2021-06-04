@@ -11,6 +11,11 @@
 
     <properties>
         <docker.image.prefix>springboot</docker.image.prefix>
+        <!--docker插件-->
+        <!-- docker私服地址,Harbor配置完默认地址就是80,默认不带端口号。但是我这里是81 -->
+        <docker.repostory>10.211.55.13/</docker.repostory>
+        <!--项目名,需要和Harbor中的项目名称保持一致 -->
+        <docker.registry.name>test</docker.registry.name>
     </properties>
     <artifactId>springboot-docker</artifactId>
     <dependencies>
@@ -46,30 +51,30 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <!-- Docker maven plugin -->
-<!--            <plugin>-->
-<!--                <groupId>com.spotify</groupId>-->
-<!--                <artifactId>docker-maven-plugin</artifactId>-->
-<!--                <version>1.1.0</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>default</id>-->
-<!--                        <goals>-->
-<!--                            <goal>build</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--                <configuration>-->
-<!--                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>-->
-<!--                    <dockerDirectory>${project.basedir}</dockerDirectory>-->
-<!--                    <resources>-->
-<!--                        <resource>-->
-<!--                            <targetPath>/</targetPath>-->
-<!--                            <directory>${project.build.directory}</directory>-->
-<!--                            <include>${project.build.finalName}.jar</include>-->
-<!--                        </resource>-->
-<!--                    </resources>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>com.spotify</groupId>-->
+            <!--                <artifactId>docker-maven-plugin</artifactId>-->
+            <!--                <version>1.1.0</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>default</id>-->
+            <!--                        <goals>-->
+            <!--                            <goal>build</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--                <configuration>-->
+            <!--                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>-->
+            <!--                    <dockerDirectory>${project.basedir}</dockerDirectory>-->
+            <!--                    <resources>-->
+            <!--                        <resource>-->
+            <!--                            <targetPath>/</targetPath>-->
+            <!--                            <directory>${project.build.directory}</directory>-->
+            <!--                            <include>${project.build.finalName}.jar</include>-->
+            <!--                        </resource>-->
+            <!--                    </resources>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>

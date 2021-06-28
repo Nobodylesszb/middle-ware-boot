@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 日志统一打印切面
  */
-@Component
+//@Component
 @Aspect
 public class LogAspect {
 

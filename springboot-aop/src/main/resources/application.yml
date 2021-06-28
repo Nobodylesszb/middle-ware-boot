@@ -1,0 +1,16 @@
+application:
+  host: http://edward-beta.deepexi.com/dev/ci-service
+  edward-web-host: http://edward-beta.deepexi.com/dev/edward-web
+  jenkins-connection-info:
+    host: http://10.201.0.50:30006
+    username: deepexi
+    password: abcd1234
+    apiToken: 11035d30dd8b58f5a68801869e6f19ba66
+    tunnel-host: 10.201.0.50:30237
+  artifact-manage-url: http://edward-beta.deepexi.com/dev/artifact-service/v1/artifact/artifact/upload
+  artifact-manage-username: admin
+  artifact-manage-password: admin123
+  artifact-manage-nexus-host: https://artifact-dev.deepexi.com
+
+server:
+  port: 8085

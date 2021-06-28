@@ -34,7 +34,7 @@ public class GitLab {
     }
 
     public static void main(String[] args) throws Exception {
-        boolean test = GitLab.test();
-        System.out.println(test);
+        Boolean bo = true;
+        System.out.println(bo.toString());
     }
 }

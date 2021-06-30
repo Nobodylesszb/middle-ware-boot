@@ -13,4 +13,4 @@ application:
   artifact-manage-nexus-host: https://artifact-dev.deepexi.com
 
 server:
-  port: 8085
+  port: 9085

@@ -5,6 +5,7 @@
     <modules>
         <module>spring-cache-starter</module>
         <module>springboot-cache-redis</module>
+        <module>springboot-redisson-starter</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
